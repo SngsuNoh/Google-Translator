@@ -1,5 +1,7 @@
 Python anaconda의 PyQt5 모듈을 통해 만든 데스크탑용 구글 번역기입니다.  
 파이썬용 구글 번역 API Googletrans를 이용했습니다.  
+코드는 anaconda pyqt5 모듈이 설치된 환경에서 정상 동작합니다.  
+mac os, windows 에서 동작하는 GUI 실행 파일을 개발 중입니다.  
 많은 관심 부탁드립니다.  
 
 2020-06-06 실시간 한영/영한 번역을 지원합니다.  
