@@ -11,6 +11,7 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.translator = Translator()
+        #googletrans Translator 객체를 생성했다.
         self.initUI()
 
     def initUI(self):
@@ -27,10 +28,11 @@ class MyApp(QWidget):
         vbox1.addWidget(self.lbl1)
         vbox1.addWidget(self.before1)
         vbox1.addWidget(self.lbl2)
-        vbox1.addWidget(self.after1)
+        vbox1.addWidget(self.after1) #텍스트 편집기와 라벨 두 개를 수직 박스 레이아웃으로 정렬했다.
         self.KorEn.setLayout(vbox1)
 
         self.before1.textChanged.connect(self.translate_kor)
+        #사용자가 입력한 텍스트가 바뀔 때 마다 translate_kor 메소드를 호출하여 실시간 번역이 가능하도록 한다.
 
         #EntoKor
         self.EnKor = QWidget()
@@ -68,7 +70,7 @@ class MyApp(QWidget):
         text_kor = self.before1.toPlainText()
         if len(text_kor) != 0: #영한번역에서 텍스트를 입력했다가 지우면 강제종료되는 경우가 있어 예외처리했다.
             text_en = self.translator.translate(text_kor).text
-            self.after1.setText(text_en)
+            self.after1.setText(text_en) #번역한 결과를 after 라벨에 표시
 
     def translate_en(self):
         text_en = self.before2.toPlainText()
@@ -77,15 +79,16 @@ class MyApp(QWidget):
             #src="번역 전 언어", dest="번역 후 언어" 로 설정한다.
             self.after2.setText(text_kor)
 
-    def closeEvent(self, event):
+    def closeEvent(self, event): #closeEvent 이벤트 핸들러를 재구성해 종료 시 확인 창이 나타나도록 했다.
         endMessage = QMessageBox()
         endMessage.setWindowTitle("종료하기")
         endMessage.setText("번역기를 종료하시겠습니까?")
         endMessage.setDetailedText("써주셔서 감사합니다 :D")
 
-
         reply = endMessage.question(self, "", endMessage.text(),
                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        #반환값을 reply에 저장하고 조건문에 진입한다.
+
         if reply == QMessageBox.Yes:
             event.accept()
         else:
